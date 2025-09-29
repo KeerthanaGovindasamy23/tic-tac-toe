@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic-Tac-Toe Arena</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Sigmar+One&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div id="welcome-screen" class="screen active">
+        <h1 class="title-font">Welcome to Tic-Tac-Toe Arena!</h1>
+        <button id="start-game-button">Start Game</button>
+    </div>
+
+    <div id="game-screen" class="screen">
+        <h1 id="main-title" class="title-font">Tic-Tac-Toe Battle</h1>
+
+        <div id="main-game-flex">
+
+            <div id="game-info">
+                <div id="status-message">Player X's Turn</div>
+                <div id="scorecard">
+                    <span id="player-x-score" class="score-display">Player X: 0</span>
+                    <span id="player-o-score" class="score-display">Player O: 0</span>
+                </div>
+                <div id="game-count">Game 1 of 5</div>
+            </div>
+
+            <div id="game-container">
+                <div id="board" class="board">
+                </div>
+
+                <div id="round-modal" class="modal">
+                    <div class="modal-content">
+                        <p id="round-result-text"></p>
+                        <button id="modal-next-round">Continue</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="game-controls">
+            <button id="reset-button">Restart Series</button>
+            <button id="quit-button">Quit Game</button>
+        </div>
+    </div>
+
+    <div id="quit-modal" class="modal-fullscreen">
+        <div class="modal-content">
+            <p>Are you sure you want to quit the game?</p>
+            <button id="confirm-quit-yes">Yes</button>
+            <button id="confirm-quit-no">No</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
