@@ -1,0 +1,267 @@
+/**
+ * --- FONTS & BASE ---
+ *
+ * @format
+ */
+
+body {
+  font-family: "Press Start 2P", cursive;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  margin: 0;
+  /* Grass background */
+  background-color: #5cb85c;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="10"><rect width="10" height="10" fill="%235cb85c"/><path d="M-1,1 l2,-2 M0,10 l10,-10 M9,11 l2,-2" stroke="%236ad66a" stroke-width="1"/></svg>');
+  color: #eee;
+  overflow: hidden;
+}
+.title-font {
+  font-family: "Sigmar One", cursive;
+  text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8);
+  font-size: 3em;
+}
+
+/* --- Screen Management --- */
+.screen {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+.screen.active {
+  display: flex;
+}
+
+/* --- New Flex Layout Container (Side-by-Side) --- */
+#main-game-flex {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  margin-bottom: 20px;
+}
+
+/* --- Game Info (Scorecard & Status - LEFT SIDE) --- */
+#game-info {
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.4);
+  padding: 20px 15px;
+  border-radius: 10px;
+  height: 360px; /* **CRITICAL FIX**: Match board height */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around; /* **CRITICAL FIX**: Distributes content vertically */
+  align-items: center;
+  min-width: 150px;
+}
+
+#status-message {
+  font-size: 1.1em;
+  font-weight: bold;
+}
+
+#scorecard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+.score-display {
+  font-size: 1.1em;
+}
+#player-x-score {
+  color: #ff0000;
+}
+#player-o-score {
+  color: #007bff;
+}
+#game-count {
+  font-size: 1em;
+}
+
+/* --- Game Container (Holds Board + Modal) --- */
+#game-container {
+  position: relative;
+}
+
+/* --- Game Board (No significant change) --- */
+.board {
+  display: grid;
+  grid-template-columns: repeat(3, 120px);
+  grid-template-rows: repeat(3, 120px);
+  gap: 0;
+  width: 360px;
+  height: 360px;
+  background-color: #d2b48c;
+  border: 5px solid white;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5), 0 0 20px rgba(0, 0, 0, 0.7);
+}
+
+.cell {
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 4.5em;
+  font-weight: bold;
+  cursor: pointer;
+  user-select: none;
+  position: relative;
+  z-index: 1;
+}
+
+/* White Line Dividers */
+.cell:not(:nth-child(3n)) {
+  border-right: 5px solid white;
+}
+.cell:not(:nth-child(n + 7)) {
+  border-bottom: 5px solid white;
+}
+
+.cell.X {
+  color: #ff0000;
+}
+.cell.O {
+  color: #007bff;
+}
+
+/* --- Round Modal (Over Board) --- */
+.modal {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 5;
+  justify-content: center;
+  align-items: center;
+}
+.modal.active {
+  display: flex;
+}
+.modal-content {
+  background-color: #fefefe;
+  color: #333;
+  padding: 20px 30px;
+  border-radius: 10px;
+  max-width: 90%;
+  text-align: center;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+}
+#round-result-text {
+  font-size: 1.2em;
+  margin-bottom: 15px;
+  font-weight: bold;
+  white-space: nowrap; /* **CRITICAL FIX**: Keeps text on one line */
+}
+
+/* ... (Button and fullscreen modal styles) ... */
+.game-controls {
+  margin-top: 30px;
+  display: flex;
+  gap: 15px;
+}
+.game-controls button,
+#reset-button,
+#modal-next-round {
+  padding: 12px 25px;
+  font-size: 1.2em;
+  cursor: pointer;
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+#modal-next-round {
+  background-color: #28a745;
+  color: white;
+}
+#reset-button {
+  background-color: #007bff;
+  color: white;
+}
+#quit-button {
+  background-color: #dc3545;
+  color: white;
+}
+.modal-fullscreen {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 10;
+  justify-content: center;
+  align-items: center;
+}
+.modal-fullscreen.active {
+  display: flex;
+}
+#confirm-quit-yes {
+  background-color: #dc3545;
+  color: white;
+}
+#confirm-quit-no {
+  background-color: #007bff;
+  color: white;
+}
+/* --- CSS Fixes for Button Size --- */
+
+/* ... (Existing code above this point) ... */
+
+/* Welcome Screen */
+#welcome-screen {
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 50px;
+  border-radius: 15px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+}
+#start-game-button {
+  padding: 20px 40px; /* **INCREASED PADDING** */
+  font-size: 2.2em; /* **BIGGER FONT** */
+  background-color: #ffc107;
+  color: #333;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s, background-color 0.2s;
+}
+
+/* ... (Rest of the CSS code below this point) ... */
+/* --- CSS Fixes for Pop-up Size --- */
+
+/* ... (Existing code above this point) ... */
+
+/* --- Round Modal (Over Board) --- */
+.modal {
+  /* ... (Existing code for .modal) ... */
+}
+.modal.active {
+  display: flex;
+}
+.modal-content {
+  background-color: #fefefe;
+  color: #333;
+  padding: 30px 40px; /* Increased padding */
+  border-radius: 10px;
+  max-width: 300px; /* **CRITICAL FIX**: Make the box wider (300px) */
+  text-align: center;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+}
+#round-result-text {
+  font-size: 1.4em; /* Slightly larger font */
+  margin-bottom: 20px;
+  font-weight: bold;
+  white-space: normal; /* **CRITICAL FIX**: Allow text to wrap if necessary */
+  min-width: 200px; /* Ensure minimum display width */
+}
+
+/* ... (Rest of the CSS code below this point) ... */
